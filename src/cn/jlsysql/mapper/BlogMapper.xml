@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jlsysql.dao.BlogDao">
+    <resultMap id="blogMap" type="blog">
+        <id property="id" column="id"/>
+        <result property="title" column="title"/>
+        <result property="time" column="time"/>
+        <result property="kind" column="kind"/>
+        <result property="visit" column="visit"/>
+        <result property="content" column="content"/>
+        <association property="author" column="id" select="cn.jlsysql.dao.UserDao.getUserById"/>
+        <collection property="comments" column="id" select="cn.jlsysql.dao.CommentDao.getCommentByBlog"/>
+    </resultMap>
+    <select id="getAllBlogs" resultMap="blogMap">
+        SELECT * FROM blog ;
+    </select>
+    <select id="getBlogById" resultMap="blogMap">
+        SELECT * FROM blog WHERE id=#{id}
+    </select>
+</mapper>
