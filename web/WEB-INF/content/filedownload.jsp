@@ -1,4 +1,6 @@
-<%--
+<%@ page import="cn.jlsysql.entity.Resource" %>
+<%@ page import="java.util.concurrent.TimeUnit" %>
+<%@ page import="cn.jlsysql.util.TimeUtil" %><%--
   Created by IntelliJ IDEA.
   User: wei
   Date: 2018/4/13
@@ -13,6 +15,9 @@
     <link rel="stylesheet" href="../../css/all.css">
 </head>
 <body>
+<%
+    Resource resource= (Resource) request.getAttribute("resource");
+%>
 <div class="layui-layout layui-layout-admin">
     <!--header-->
     <%@include file="part/header.jsp"%>
@@ -20,21 +25,27 @@
     <div class="layui-row">
         <div class="layui-col-lg1">&nbsp;</div>
         <div class="layui-col-lg7">
+            <%
+                if (resource!=null){
+            %>
             <div class="write-backgroud" style="padding: 25px 15px 25px 35px;margin-top: 10px">
-                <div style="font-size: 20px">Java数据结构和算法</div>
+                <div style="font-size: 20px"><%=resource.getName()%></div>
                 <div class="layui-row" style="margin-top: 5px">
-                    <div class="layui-col-lg3" style="margin-left: 30px">上传时间:2018-02-25</div>
-                    <div class="layui-col-lg4">大小:20MB</div>
+                    <div class="layui-col-lg3" style="margin-left: 30px">上传时间:<%=TimeUtil.fomatDate(resource.getTime(),"yyyy-MM-dd").toString()%></div>
+                    <div class="layui-col-lg4">大小:<%=resource.getSize()%> MB</div>
                 </div>
                 <blockquote class="layui-elem-quote">Java数据结构和算法，超级全面，第二版，Data Structures & Algorithms in JAVA
                 </blockquote>
                 <div class="layui-row">
-                    <div class="layui-col-lg11" style="font-size: 20px">下载数:<span style="color: #D15FEE">50</span></div>
+                    <div class="layui-col-lg11" style="font-size: 20px">下载数:<span style="color: #D15FEE"><%=resource.getCount()%></span></div>
                     <div class="layui-col-lg1">
                         <button class="layui-btn layui-bg-red">下载</button>
                     </div>
                 </div>
             </div>
+            <%
+                }
+            %>
             <div style="background-color: #f6f6f6;height: 10px">
 
             </div>

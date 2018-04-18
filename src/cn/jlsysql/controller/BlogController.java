@@ -7,8 +7,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
-
 /*
                            _ooOoo_
                           o8888888o
@@ -53,6 +51,7 @@ public class BlogController {
     public  ModelAndView classify(@PathVariable String id,ModelAndView modelAndView){
         System.out.println("classify:"+id);
         modelAndView.setViewName("index");
+        modelAndView.addObject("blogs",blogService.getAllBlogs());
         return modelAndView;
     }
 

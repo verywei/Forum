@@ -1,11 +1,13 @@
-package cn.jlsysql.controller;
+package cn.jlsysql.service.impl;
 
+import cn.jlsysql.dao.ResourceDao;
+import cn.jlsysql.entity.Resource;
+import cn.jlsysql.pojo.Page;
 import cn.jlsysql.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /*
                            _ooOoo_
@@ -29,20 +31,20 @@ import org.springframework.web.servlet.ModelAndView;
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                  佛祖保佑       永无BUG
 */
-@Controller
-public class ResourceController {
+@Service
+public class ResourceServiceImpl implements ResourceService {
     @Autowired
-    ResourceService resourceService;
-    @RequestMapping("/resource")
-    public ModelAndView resource(ModelAndView modelAndView){
-        modelAndView.setViewName("resource");
-        modelAndView.addObject("resources",resourceService.getAllResorce(""+1,""+10));
-        return  modelAndView;
+    ResourceDao resourceDao;
+    @Override
+    public List<Resource> getAllResorce(String page, String limit) {
+        Page page1=new Page();
+        page1.setLimit(Integer.parseInt(limit));
+        page1.setPage(((Integer.parseInt(page)-1)*Integer.parseInt(limit)));
+        return resourceDao.getAllResource(page1);
     }
-    @RequestMapping("/filedownload/{id}")
-    public  ModelAndView filedownload(@PathVariable String id, ModelAndView modelAndView){
-        modelAndView.setViewName("filedownload");
-        modelAndView.addObject("resource",resourceService.getResourceById(id));
-        return modelAndView;
+
+    @Override
+    public Resource getResourceById(String id) {
+        return resourceDao.getResourceById(id);
     }
 }

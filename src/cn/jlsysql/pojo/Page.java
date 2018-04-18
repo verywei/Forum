@@ -1,6 +1,6 @@
-import java.util.HashMap;
-import java.util.Scanner;
-import java.util.concurrent.ConcurrentHashMap;
+package cn.jlsysql.pojo;
+
+import org.springframework.stereotype.Component;
 
 /*
                            _ooOoo_
@@ -24,22 +24,23 @@ import java.util.concurrent.ConcurrentHashMap;
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                  佛祖保佑       永无BUG
 */
-public class Main {
-    public static void main(String []args){
-        int w=2;
-        switch (w){
-            case 1 :{
-                System.out.println(1);
+@Component
+public class Page {
+    private   int page,limit;
 
-            }case 2:{
-                System.out.println(2);
+    public int getPage() {
+        return page;
+    }
 
-            }default:{
-                System.out.println(3);
+    public void setPage(int page) {
+        this.page = page;
+    }
 
-            }
+    public int getLimit() {
+        return limit;
+    }
 
-
-        }
+    public void setLimit(int limit) {
+        this.limit = limit;
     }
 }
