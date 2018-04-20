@@ -1,6 +1,7 @@
 package cn.jlsysql.service;
 
 import cn.jlsysql.entity.Resource;
+import cn.jlsysql.pojo.AddResource;
 
 import java.util.List;
 
@@ -28,5 +29,8 @@ import java.util.List;
 */
 public interface ResourceService {
     List<Resource> getAllResorce(String page,String limit);
+    List<Resource> getResorceByTime(String page,String limit);
     Resource getResourceById(String id);
+    void addResource(AddResource addResource);
+
 }

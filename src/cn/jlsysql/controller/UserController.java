@@ -1,12 +1,15 @@
 package cn.jlsysql.controller;
 
 import cn.jlsysql.entity.Blog;
+import cn.jlsysql.entity.User;
 import cn.jlsysql.pojo.ChangePassword;
 import cn.jlsysql.pojo.LoginUser;
 import cn.jlsysql.pojo.PersonInfo;
 import cn.jlsysql.pojo.RegistUser;
 import cn.jlsysql.service.BlogService;
+import cn.jlsysql.service.FollowService;
 import cn.jlsysql.service.UserService;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.Errors;
 import org.springframework.validation.annotation.Validated;
@@ -16,8 +19,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.io.IOException;
 import java.text.ParsePosition;
 
 /*
@@ -48,6 +53,9 @@ public class UserController {
     UserService userService;
     @Resource
     BlogService blogService;
+    @Resource
+    FollowService followService;
+
     @RequestMapping(value = {"/register"},method = {RequestMethod.GET})
     public ModelAndView registerGet(ModelAndView modelAndView, RegistUser user){
         modelAndView.setViewName("register");
@@ -75,7 +83,6 @@ public class UserController {
     }
     @RequestMapping(value = {"/login"},method = {RequestMethod.POST})
     public ModelAndView loginPost( @Validated @ModelAttribute("user") LoginUser user, Errors errors , HttpSession session,ModelAndView modelAndView){
-
         if (userService.checkUser(user,session)&&(!errors.hasErrors())){
             modelAndView.setViewName("index");
             modelAndView.addObject("blogs",blogService.getAllBlogs());
@@ -85,6 +92,7 @@ public class UserController {
         }
         modelAndView.addObject("user",user);
         return modelAndView;
+
     }
     @RequestMapping(value = {"/logout"},method = {RequestMethod.GET})
     public ModelAndView logout(ModelAndView modelAndView, HttpSession session, HttpServletRequest request){
@@ -105,5 +113,12 @@ public class UserController {
     public  ModelAndView upload(ModelAndView modelAndView){
         modelAndView.setViewName("usersetting");
         return  modelAndView;
+    }
+    @RequestMapping("/focus")
+    public void focus(HttpServletRequest request, HttpServletResponse response,HttpSession session) throws IOException {
+
+        followService.addFollow(request.getParameter("followed"),((User)session.getAttribute("user")).getId()+"");
+        System.out.println(request.getParameter("followed"));
+        response.getWriter().write("ok");
     }
 }

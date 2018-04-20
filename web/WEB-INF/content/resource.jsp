@@ -17,6 +17,7 @@
 <body>
 <%
     List<Resource> resources= (List<Resource>) request.getAttribute("resources");
+    List<Resource> resources_by_time=(List<Resource>) request.getAttribute("resource_by_time");
 %>
 <div class="layui-layout layui-layout-admin">
     <!--header-->
@@ -57,7 +58,30 @@
                         %>
 
                     </div>
-                    <div class="layui-tab-item ">内容2</div>
+                    <div class="layui-tab-item ">
+                     <%
+                        if (resources_by_time!=null){
+                            for (Resource resource:resources_by_time){
+                    %>
+                        <div style="padding:  5px 15px 5px 15px">
+                            <div><a href="/filedownload/<%=resource.getId()%>" style="margin-left: 15px;font-size: 23px;margin-top: 5px;"><%=resource.getName()%></a>
+                            </div>
+                            <ul style="margin-top: 10px">
+                                </li>
+                                <li style="display: inline-block;margin-left: 50px;"><a href="#"><i
+                                        class="layui-icon" style="size: 11px;">&#xe6af;</i>上传者:<%=resource.getAuthor().getNickname()%></a></li>
+                                <li style="display: inline-block;margin-left: 50px;"><%=resource.getTime()%></li>
+                            </ul>
+                            <div style="float: right;margin-top: -50px">
+                                <div style="text-align: center;color: #1E9FFF;font-size: 20px"><%=resource.getCount()%></div>
+                                <div>下载量</div>
+                            </div>
+                            <hr class="layui-bg-gray"/>
+                        </div>
+                        <%
+                                };
+                            }
+                        %></div>
                 </div>
             </div>
         </div>
@@ -81,7 +105,7 @@
                     <div style="font-size: 12px">资源数量:<span><%=user.getResource_amount()%></span></div>
                 </div>
                 <div style="text-align: center;">
-                    <button class="layui-btn" style="margin-top: 5px">上传资源</button>
+                    <button class="layui-btn" style="margin-top: 5px"><a href="fileupload">上传资源</a></button>
                 </div>
                 <%
                     }

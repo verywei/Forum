@@ -43,7 +43,7 @@
                     <div class="layui-form-item">
                         <div class="layui-input-block">
                             <%--<input type="password" class="layui-input" placeholder="请输入密码" autocomplete="off"style="width: 240px;">--%>
-                            <form:password path="password" cssClass="layui-input" placeholder="请输入用户名" autocomplete="off" cssStyle="width: 240px;"/>
+                            <form:password path="password" cssClass="layui-input" placeholder="请输入密码" autocomplete="off" cssStyle="width: 240px;"/>
                            <div>&nbsp</div>
                         </div>
                     </div>

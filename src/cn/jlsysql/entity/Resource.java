@@ -1,5 +1,7 @@
 package cn.jlsysql.entity;
 
+import java.util.List;
+
 /*
                            _ooOoo_
                           o8888888o
@@ -26,6 +28,24 @@ public class Resource {
     private String id, name , time,count,size;
     private User author ;
     private String url;
+    private String content;
+    private List<ResourceComment> comments;
+
+    public List<ResourceComment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<ResourceComment> comments) {
+        this.comments = comments;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
 
     public String getId() {
         return id;
@@ -83,3 +103,15 @@ public class Resource {
         this.url = url;
     }
 }
+/*
+CREATE TABLE `resource_comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `time` datetime DEFAULT NULL,
+  `author` int(11) DEFAULT NULL,
+  `content` text DEFAULT NULL,
+  `se_commend` enum('0','1') DEFAULT NULL,
+  `comment_id` int(11) DEFAULT NULL,
+  `blog_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8
+ */

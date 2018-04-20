@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jlsysql.dao.FollowDao">
+    <resultMap id="follows" type="follow">
+        <association property="followed" column="followed" select="cn.jlsysql.dao.UserDao.getUserById"/>
+        <association property="follower" column="follower" select="cn.jlsysql.dao.UserDao.getUserById"/>
+    </resultMap>
+    <select id="getFollow" parameterType="getFollow" resultMap="follows">
+        SELECT * FROM follow WHERE followed=#{followed} AND follower=#{follower}
+    </select>
+    <insert id="addFollow" parameterType="getFollow">
+        INSERT INTO follow VALUES (#{followed},#{follower})
+    </insert>
+</mapper>

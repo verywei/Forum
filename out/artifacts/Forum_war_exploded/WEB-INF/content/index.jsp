@@ -4,7 +4,8 @@
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="java.text.DateFormat" %>
-<%@ page import="java.text.ParsePosition" %><%--
+<%@ page import="java.text.ParsePosition" %>
+<%@ page import="cn.jlsysql.util.Kind" %><%--
   Created by IntelliJ IDEA.
   User: wei
   Date: 2018/4/13
@@ -31,7 +32,8 @@
             <div class="layui-col-lg2" style="text-align: right;">
                 <ul class="layui-nav layui-nav-tree layui-inline" lay-filter="demo"
                     style="margin-right: 10px; width: 100px;text-align: center ;display: inline-block">
-                    <li class="layui-nav-item layui-nav-itemed"><a href="/classify/1">人工智能</a></li>
+                    <li class="layui-nav-item layui-nav-itemed"><a href="/classify/0">推荐</a></li>
+                    <li class="layui-nav-item"><a href="/classify/1">人工智能</a></li>
                     <li class="layui-nav-item"><a href="/classify/2">大数据</a></li>
                     <li class="layui-nav-item"><a href="/classify/3">区块链</a></li>
                     <li class="layui-nav-item"><a href="/classify/4">数据库</a></li>
@@ -67,11 +69,11 @@
                                 </div>
                                 <ul style="margin-top: 10px">
                                     <li style="display: inline-block;margin-left: 25px;"><a href="#  "
-                                                                                            style="color: #1E9FFF;">框架</a>
+                                                                                            style="color: #1E9FFF;"><%=Kind.getKind1(Integer.parseInt(blogs.get(i).getKind())).getName()%></a>
                                     </li>
                                     <li style="display: inline-block;margin-left: 50px;"><a href="#"><i
                                             class="layui-icon" style="size: 11px;">&#xe6af;</i><%=blogs.get(i).getAuthor().getNickname()%></a></li>
-                                    <li style="display: inline-block;margin-left: 50px;"><%=dateFormat.format(date)%></li>
+                                    <li style="display: inline-block;margin-left: 50px;"><%=blogs.get(i).getTime()%></li>
                                 </ul>
                                 <div style="float: right;margin-top: -50px">
                                     <div style="text-align: center;color: #1E9FFF"><%=blogs.get(i).getVisit()%></div>

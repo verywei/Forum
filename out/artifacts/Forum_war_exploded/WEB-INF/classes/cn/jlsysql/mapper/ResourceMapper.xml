@@ -10,14 +10,22 @@
         <result property="count" column="count"/>
         <result property="size" column="size"/>
         <result property="url" column="url"/>
-        <association property="author" column="id" select="cn.jlsysql.dao.UserDao.getUserById"/>
+        <result property="content" column="content"/>
+        <association property="author" column="author" select="cn.jlsysql.dao.UserDao.getUserById"/>
+        <collection property="comments" column="id" select="cn.jlsysql.dao.ResourceCommentDao.getResourceCommentById"/>
     </resultMap>
 
 
     <select id="getAllResource" parameterType="page" resultMap="resources">
-        SELECT  * FROM resource LIMIT #{page},#{limit}
+        SELECT  * FROM resource ORDER BY count DESC LIMIT #{page},#{limit}
     </select>
     <select id="getResourceById" parameterType="string" resultMap="resources">
         SELECT * FROM  resource WHERE id=#{id}
+    </select>
+    <insert id="addResource" parameterType="addResource">
+        INSERT INTO resource(name,author,time,count,size,url,content) VALUES (#{name},#{author},now(),#{count},#{size},#{url},#{content})
+    </insert>
+    <select id="getResourceByTime" parameterType="page" resultMap="resources">
+        SELECT  * FROM resource ORDER BY  time DESC LIMIT #{page},#{limit}
     </select>
 </mapper>

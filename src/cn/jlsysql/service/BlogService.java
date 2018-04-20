@@ -29,4 +29,5 @@ import java.util.List;
 public interface BlogService {
     public List<Blog> getAllBlogs();
     public Blog getBlogByid(String id);
+    public List<Blog> getBlogByKind(int kind);
 }

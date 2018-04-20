@@ -9,7 +9,7 @@
         <result property="kind" column="kind"/>
         <result property="visit" column="visit"/>
         <result property="content" column="content"/>
-        <association property="author" column="id" select="cn.jlsysql.dao.UserDao.getUserById"/>
+        <association property="author" column="author" select="cn.jlsysql.dao.UserDao.getUserById"/>
         <collection property="comments" column="id" select="cn.jlsysql.dao.CommentDao.getCommentByBlog"/>
     </resultMap>
     <select id="getAllBlogs" resultMap="blogMap">
@@ -17,5 +17,8 @@
     </select>
     <select id="getBlogById" resultMap="blogMap">
         SELECT * FROM blog WHERE id=#{id}
+    </select>
+    <select id="getBlogByKind" parameterType="int" resultMap="blogMap">
+        SELECT * FROM blog WHERE kind=#{kind}
     </select>
 </mapper>

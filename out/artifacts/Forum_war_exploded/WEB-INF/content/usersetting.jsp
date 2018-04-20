@@ -27,43 +27,60 @@
                     </ul>
                     <div class="layui-tab-content" style="padding: 15px">
                         <div class="layui-tab-item layui-show">
-                            <form:form modelAttribute="changePassword" cssClass="layui-form" action="" method="post" cssStyle="width: 450px; ">
+                            <form:form modelAttribute="changePassword" cssClass="layui-form" action="" method="post"
+                                       cssStyle="width: 450px; ">
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">旧密码</label>
                                     <div class="layui-input-block">
-                                        <form:password path="oldPass" placeholder="请输入旧密码"  cssClass="layui-input" autocomplete="false" />
+                                        <form:password path="oldPass" placeholder="请输入旧密码" cssClass="layui-input"
+                                                       autocomplete="false"/>
                                         <div><form:errors path="oldPass" cssStyle="color: red"/>&nbsp;</div>
                                     </div>
                                 </div>
-                                <div class="layui-form-item">
+                                <div class="layui-form-item" >
                                     <label class="layui-form-label">新密码</label>
                                     <div class="layui-input-block">
-                                        <form:password path="newPass" placeholder="请输入新密码"  cssClass="layui-input" autocomplete="false" />
+                                        <form:password path="newPass" placeholder="请输入新密码" cssClass="layui-input"
+                                                       autocomplete="false"/>
                                         <div><form:errors path="newPass" cssStyle="color: red"/>&nbsp;</div>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">确认密码</label>
                                     <div class="layui-input-block">
-                                        <form:password path="confirmPass" placeholder="请输入确认密码"  cssClass="layui-input" autocomplete="false" />
+                                        <form:password path="confirmPass" placeholder="请输入确认密码" cssClass="layui-input"
+                                                       autocomplete="false"/>
                                         <div><form:errors path="confirmPass" cssStyle="color: red"/>&nbsp;</div>
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
-                                    <div class="layui-input-block" >
+                                    <div class="layui-input-block">
                                         <button class="layui-btn" type="submit" style="width: 140px">修改</button>
                                     </div>
                                 </div>
                             </form:form>
                         </div>
-                        <div class="layui-tab-item">
-                            <div class="layui-upload">
-                                <button type="button" class="layui-btn" id="test1">上传图片</button>
-                                <div class="layui-upload-list">
-                                    <img class="layui-upload-img" id="demo1" style="width: 45px">
-                                    <p id="demoText"></p>
+                        <div class="layui-tab-item" >
+                            <form class="layui-form" style="width: 450px;">
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">选择图片</label>
+                                    <div class="layui-input-block">
+                                        <input type="file">
+                                    </div>
                                 </div>
-                            </div>
+                                <div class="layui-form-item">
+                                    <label class="layui-form-label">昵称</label>
+                                    <div class="layui-input-block">
+                                        <input type="text" name="nickname" autocomplete="off" placeholder="请输入昵称"
+                                               class="layui-input">
+                                    </div>
+                                </div>
+                                <div class="layui-form-item">
+                                    <div class="layui-input-block">
+                                       <button class="layui-btn" type="submit">提交</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -76,32 +93,32 @@
 </div>
 <script src="../../layui/layui.js" charset="UTF-8"></script>
 <script>
-    layui.use(['element', 'carousel','upload'], function () {
+    layui.use(['element', 'carousel', 'upload'], function () {
         var element = layui.element;
         var carousel = layui.carousel;
         var upload = layui.upload;
         var $ = layui.jquery;
         var uploadInst = upload.render({
             elem: '#test1'
-            ,url: '/upload/'
-            ,before: function(obj){
+            , url: '/upload/'
+            , before: function (obj) {
                 //预读本地文件示例，不支持ie8
-                obj.preview(function(index, file, result){
+                obj.preview(function (index, file, result) {
                     $('#demo1').attr('src', result); //图片链接（base64）
                 });
             }
-            ,done: function(res){
+            , done: function (res) {
                 //如果上传失败
-                if(res.code > 0){
+                if (res.code > 0) {
                     return layer.msg('error');
                 }
                 //上传成功
             }
-            ,error: function(){
+            , error: function () {
                 //演示失败状态，并实现重传
                 var demoText = $('#demoText');
                 demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-mini demo-reload">重试</a>');
-                demoText.find('.demo-reload').on('click', function(){
+                demoText.find('.demo-reload').on('click', function () {
                     uploadInst.upload();
                 });
             }

@@ -34,12 +34,12 @@
                     <div class="layui-col-lg3" style="margin-left: 30px">上传时间:<%=TimeUtil.fomatDate(resource.getTime(),"yyyy-MM-dd").toString()%></div>
                     <div class="layui-col-lg4">大小:<%=resource.getSize()%> MB</div>
                 </div>
-                <blockquote class="layui-elem-quote">Java数据结构和算法，超级全面，第二版，Data Structures & Algorithms in JAVA
+                <blockquote class="layui-elem-quote"><%=resource.getContent()%>
                 </blockquote>
                 <div class="layui-row">
                     <div class="layui-col-lg11" style="font-size: 20px">下载数:<span style="color: #D15FEE"><%=resource.getCount()%></span></div>
                     <div class="layui-col-lg1">
-                        <button class="layui-btn layui-bg-red">下载</button>
+                        <button class="layui-btn layui-bg-red"><a href="/resource/<%=resource.getUrl()%>">下载</a></button>
                     </div>
                 </div>
             </div>
@@ -50,41 +50,47 @@
 
             </div>
             <div style=" background-color: #FFFFFF;padding: 20px 20px 5px 20px" class="critic">
+                <%
+                    for (int i=0;i<resource.getComments().size();i++){
+                %>
                 <div>
-                    <img src="../../img/img1.jpg" class="layui-circle" style="width: 30px;height: 30px"><a href="#"
-                                                                                                           style="margin-left: 10px">weiwei</a><span
-                        style="margin-left: 25px;">2017年12月2日</span>
+                    <img src="../../img/userimg/<%=resource.getComments().get(i).getAuthor().getImg()%>" class="layui-circle" style="width: 30px;height: 30px"><a href="#"
+                                                                                                           style="margin-left: 10px"><%=resource.getComments().get(i).getAuthor().getNickname()%></a><span
+                        style="margin-left: 25px;"><%=resource.getComments().get(i).getTime()%></span>
                     <div style="margin-left: 30px">
-                        现在已经很清晰了，用Spring可以让各个模块耦合更松散，可以在业务逻辑之外进行增强代理，实现非业务功能。所以就算没了Spring，也会有类似的其他框架来实现这些目的，而现在Spring的生态比较大，社区又比较活跃，为什么不用呢？
+                        <%=resource.getComments().get(i).getContent()%>
                     </div>
                     <hr class="layui-bg-gray">
                 </div>
-                <div>
-                    <img src="../../img/img1.jpg" class="layui-circle" style="width: 30px;height: 30px"><a href="#"
-                                                                                                           style="margin-left: 10px">weiwei</a><span
-                        style="margin-left: 25px;">2017年12月2日</span>
-                    <div style="margin-left: 30px">
-                        现在已经很清晰了，用Spring可以让各个模块耦合更松散，可以在业务逻辑之外进行增强代理，实现非业务功能。所以就算没了Spring，也会有类似的其他框架来实现这些目的，而现在Spring的生态比较大，社区又比较活跃，为什么不用呢？
-                    </div>
-                    <hr class="layui-bg-gray">
-                </div>
-                <div>
-                    <img src="../../img/img1.jpg" class="layui-circle" style="width: 30px;height: 30px"><a href="#"
-                                                                                                           style="margin-left: 10px">weiwei</a><span
-                        style="margin-left: 25px;">2017年12月2日</span>
-                    <div style="margin-left: 30px">
-                        现在已经很清晰了，用Spring可以让各个模块耦合更松散，可以在业务逻辑之外进行增强代理，实现非业务功能。所以就算没了Spring，也会有类似的其他框架来实现这些目的，而现在Spring的生态比较大，社区又比较活跃，为什么不用呢？
-                    </div>
-                    <hr class="layui-bg-gray">
-                </div>
+                <%
+                    }
+                %>
+                <%--<div>--%>
+                    <%--<img src="../../img/img1.jpg" class="layui-circle" style="width: 30px;height: 30px"><a href="#"--%>
+                                                                                                           <%--style="margin-left: 10px">weiwei</a><span--%>
+                        <%--style="margin-left: 25px;">2017年12月2日</span>--%>
+                    <%--<div style="margin-left: 30px">--%>
+                        <%--现在已经很清晰了，用Spring可以让各个模块耦合更松散，可以在业务逻辑之外进行增强代理，实现非业务功能。所以就算没了Spring，也会有类似的其他框架来实现这些目的，而现在Spring的生态比较大，社区又比较活跃，为什么不用呢？--%>
+                    <%--</div>--%>
+                    <%--<hr class="layui-bg-gray">--%>
+                <%--</div>--%>
+                <%--<div>--%>
+                    <%--<img src="../../img/img1.jpg" class="layui-circle" style="width: 30px;height: 30px"><a href="#"--%>
+                                                                                                           <%--style="margin-left: 10px">weiwei</a><span--%>
+                        <%--style="margin-left: 25px;">2017年12月2日</span>--%>
+                    <%--<div style="margin-left: 30px">--%>
+                        <%--现在已经很清晰了，用Spring可以让各个模块耦合更松散，可以在业务逻辑之外进行增强代理，实现非业务功能。所以就算没了Spring，也会有类似的其他框架来实现这些目的，而现在Spring的生态比较大，社区又比较活跃，为什么不用呢？--%>
+                    <%--</div>--%>
+                    <%--<hr class="layui-bg-gray">--%>
+                <%--</div>--%>
             </div>
         </div>
         <div class="layui-col-lg2">
             <div style="margin-left: 15px;margin-top: 10px; padding: 25px" class="write-backgroud">
                 <div class="layui-row" style="text-align: center">
-                    <div><img src="../../img/img1.jpg" style="height:105px;width:105px" class="layui-circle"></div>
-                    <div><a href="index.jsp" style="font-size: 20px">隔壁老王</a></div>
-                    <div style="font-size: 12px">资源数量:<span>12</span></div>
+                    <div><img src="../../img/userimg/<%=resource.getAuthor().getImg()%>" style="height:105px;width:105px" class="layui-circle"></div>
+                    <div><a href="index.jsp" style="font-size: 20px"><%=resource.getAuthor().getNickname()%></a></div>
+                    <div style="font-size: 12px">资源数量:<span><%=resource.getAuthor().getResource_amount()%></span></div>
                 </div>
                 <div style="text-align: center;">
                     <button class="layui-btn" style="margin-top: 5px">关注</button>

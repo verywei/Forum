@@ -45,4 +45,9 @@ public class BlogServiceImpl implements BlogService {
 
         return blogDao.getBlogById(id);
     }
+
+    @Override
+    public List<Blog> getBlogByKind(int kind) {
+        return blogDao.getBlogByKind(kind);
+    }
 }

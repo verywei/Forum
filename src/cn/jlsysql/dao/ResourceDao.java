@@ -1,6 +1,7 @@
 package cn.jlsysql.dao;
 
 import cn.jlsysql.entity.Resource;
+import cn.jlsysql.pojo.AddResource;
 import cn.jlsysql.pojo.Page;
 
 import java.util.List;
@@ -30,4 +31,6 @@ import java.util.List;
 public interface ResourceDao {
     List<Resource> getAllResource(Page page);
     Resource getResourceById(String  id);
+    List<Resource> getResourceByTime(Page page);
+    void addResource(AddResource addResource);
 }

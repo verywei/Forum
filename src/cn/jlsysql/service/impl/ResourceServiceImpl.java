@@ -2,6 +2,7 @@ package cn.jlsysql.service.impl;
 
 import cn.jlsysql.dao.ResourceDao;
 import cn.jlsysql.entity.Resource;
+import cn.jlsysql.pojo.AddResource;
 import cn.jlsysql.pojo.Page;
 import cn.jlsysql.service.ResourceService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,20 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
+    public List<Resource> getResorceByTime(String page, String limit) {
+        Page page1=new Page();
+        page1.setLimit(Integer.parseInt(limit));
+        page1.setPage(((Integer.parseInt(page)-1)*Integer.parseInt(limit)));
+        return resourceDao.getResourceByTime(page1);
+    }
+
+    @Override
     public Resource getResourceById(String id) {
         return resourceDao.getResourceById(id);
+    }
+
+    @Override
+    public void addResource(AddResource addResource) {
+        resourceDao.addResource(addResource);
     }
 }

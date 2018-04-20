@@ -28,6 +28,6 @@ import java.util.List;
 */
 public interface BlogDao {
     List<Blog> getAllBlogs();
-    List<Blog> getBlogByKind(String kind);
+    List<Blog> getBlogByKind(int kind);
     Blog getBlogById(String id);
 }

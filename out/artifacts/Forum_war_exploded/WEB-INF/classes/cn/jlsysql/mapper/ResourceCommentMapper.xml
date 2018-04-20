@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jlsysql.dao.ResourceCommentDao">
+    <resultMap id="resourceCommentMap" type="resourceComment">
+        <id column="id" property="id"/>
+        <result property="time" column="time"/>
+        <result property="se_commend" column="se_commend"/>
+        <result property="content" column="content"/>
+        <result property="comment_id" column="comment_id"/>
+        <result property="resource_id" column="resource_id"/>
+        <association property="author" column="author" select="cn.jlsysql.dao.UserDao.getUserById"/>
+    </resultMap>
+
+    <select id="getResourceCommentById" parameterType="string" resultMap="resourceCommentMap">
+        SELECT * FROM resource_comment WHERE  resource_id=#{id}
+    </select>
+
+</mapper>
