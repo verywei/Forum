@@ -1,6 +1,7 @@
 package cn.jlsysql.dao;
 
 import cn.jlsysql.entity.User;
+import cn.jlsysql.pojo.ChangePassword;
 
 /*
                            _ooOoo_
@@ -28,4 +29,5 @@ public interface UserDao {
     User getUserById(String  id);
     User getUser(String username);
     void addUser(User user);
+    void changePassword(ChangePassword changePassword);
 }

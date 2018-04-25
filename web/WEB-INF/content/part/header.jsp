@@ -20,7 +20,7 @@
         <%
             if (user!=null){
         %>
-        <li class="layui-nav-item"><a href="#">写博客</a></li>
+        <li class="layui-nav-item"><a href="/addblog">写博客</a></li>
         <li class="layui-nav-item">
             <a href="javascript:;">
                 <img src="/img/userimg/<%=user.getImg()%>" class="layui-nav-img">

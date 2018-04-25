@@ -1,4 +1,7 @@
-<%--
+<%@ page import="cn.jlsysql.entity.Forum" %>
+<%@ page import="java.util.List" %>
+<%@ page import="cn.jlsysql.entity.ForumComment" %>
+<%@ page import="cn.jlsysql.entity.Comment" %><%--
   Created by IntelliJ IDEA.
   User: wei
   Date: 2018/4/14
@@ -26,64 +29,49 @@
 <body>
 <div class="layui-layout layui-layout-admin">
     <!--header-->
-    <%@include file="part/header.jsp"%>
+    <%@include file="part/header.jsp" %>
+    <%
+        Forum forum = (Forum) request.getAttribute("forum");
+    %>
     <!--header end-->
-    <div class="layui-row" style="margin-top: 10px">
+    <div class="layui-row" style="margin-top: 10px;min-height: 643px">
         <div class="layui-col-lg2">&nbsp;</div>
         <div class="layui-col-lg8">
             <div class="write-backgroud">
                 <div style="padding: 15px;margin-left: 15px" class="layui-row">
-                    <div class="layui-col-lg9"><h1>思考：为什么要用Spring</h1></div>
-                    <div class="layui-col-lg3" style="text-align: right"><button class="layui-btn">我要跟贴</button></div>
+                    <div class="layui-col-lg9">
+                        <%--<h1><%=forum.getTitle()%></h1>--%>
+                        <h1><%=forum.getContent()%></h1>
+                    </div>
                 </div>
                 <hr class="layui-bg-gray">
             </div>
-            <div style="background-color: #f6f6f6;height: 15px"></div>
-            <div style=" background-color: #FFFFFF;" class="critic">
-                <div>
-                    <div class="layui-row">
-                        <div class="layui-col-lg1" style="text-align: center">
-                            <div><img src="../../img/img1.jpg" class="layui-circle" style="width: 30px;height: 30px"></div>
-                            <div><a href="#" style="margin-left: 10px">weiwei</a></div>
-                        </div>
-                        <div class="layui-col-lg10">
-                            <div>
-                                现在已经很清晰了，用Spring可以让各个模块耦合更松散，可以在业务逻辑之外进行增强代理，实现非业务功能。所以就算没了Spring，也会有类似的其他框架来实现这些目的，而现在Spring的生态比较大，社区又比较活跃，为什么不用呢？
-                                现在已经很清晰了，用Spring可以让各个模块耦合更松散，可以在业务逻辑之外进行增强代理，实现非业务功能。所以就算没了Spring，也会有类似的其他框架来实现这些目的，而现在Spring的生态比较大，社区又比较活跃，为什么不用呢？
-                                现在已经很清晰了，用Spring可以让各个模块耦合更松散，可以在业务逻辑之外进行增强代理，实现非业务功能。所以就算没了Spring，也会有类似的其他框架来实现这些目的，而现在Spring的生态比较大，社区又比较活跃，为什么不用呢？
-                            </div>
-                            <div style="margin-top: 15px" class="layui-row">
-                                <div class="layui-col-lg5">2015-12-12 12:20</div>
-                                <div class="layui-col-lg6"><i class="layui-icon">&#xe6c6;</i>15</div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
             <%
-                for (int i = 0; i < 5; i++) {
+                List<ForumComment> comments = forum.getComment();
+                for (int i = 0; i < comments.size(); i++) {
             %>
             <div style="background-color: #f6f6f6;height: 5px"></div>
             <div style=" background-color: #FFFFFF;" class="critic">
                 <div>
                     <div class="layui-row">
                         <div class="layui-col-lg1" style="text-align: center">
-                            <div><img src="../../img/img1.jpg" class="layui-circle" style="width: 30px;height: 30px"></div>
-                            <div><a href="#" style="margin-left: 10px">weiwei</a></div>
+                            <div><img src="../../img/userimg/<%=comments.get(i).getAuthor().getImg()%>"
+                                      class="layui-circle" style="width: 30px;height: 30px"></div>
+                            <div><a href="#" style="margin-left: 10px"><%=comments.get(i).getAuthor().getNickname()%>
+                            </a></div>
                         </div>
                         <div class="layui-col-lg10">
                             <div>
-                                现在已经很清晰了，用Spring可以让各个模块耦合更松散，可以在业务逻辑之外进行增强代理，实现非业务功能。所以就算没了Spring，也会有类似的其他框架来实现这些目的，而现在Spring的生态比较大，社区又比较活跃，为什么不用呢？
-                                现在已经很清晰了，用Spring可以让各个模块耦合更松散，可以在业务逻辑之外进行增强代理，实现非业务功能。所以就算没了Spring，也会有类似的其他框架来实现这些目的，而现在Spring的生态比较大，社区又比较活跃，为什么不用呢？
-                                现在已经很清晰了，用Spring可以让各个模块耦合更松散，可以在业务逻辑之外进行增强代理，实现非业务功能。所以就算没了Spring，也会有类似的其他框架来实现这些目的，而现在Spring的生态比较大，社区又比较活跃，为什么不用呢？
+                                <%=comments.get(i).getContent()%>
                             </div>
                             <div style="margin-top: 15px" class="layui-row">
-                                <div class="layui-col-lg5">2015-12-12 12:20</div>
-                                <div class="layui-col-lg6"><i class="layui-icon">&#xe6c6;</i>15</div>
+                                <div class="layui-col-lg5"><%=comments.get(i).getTime()%>
+                                </div>
+                                <div class="layui-col-lg6"><i
+                                        class="layui-icon">&#xe6c6;</i><%=comments.get(i).getPraise()%>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -91,12 +79,25 @@
                 }
                 ;
             %>
+            <div style="height: 160px;background-color: #FFFFFF;margin-top: 5px;padding: 15px 15px 15px 15px">
+
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <textarea class="layui-input comment-text" style="height: 105px"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">&nbsp;</label>
+                    <button class="layui-btn" onclick="comment()">提交回复</button>
+                </div>
+
+            </div>
         </div>
         <div class="layui-col-lg2">&nbsp;</div>
     </div>
     <div class="layui-bg-black" style="height: 45px">
         <br>
-        <div class="layui-row" style="margin-top: -5px" >
+        <div class="layui-row" style="margin-top: -5px">
             <div class="layui-col-lg4">&nbsp</div>
             <div class="layui-col-lg2">©2017-2018 WANGWEV版权所有</div>
             <div class="layui-col-lg2">吉ICP备17008925号</div>
@@ -106,7 +107,7 @@
     </div>
 
 </div>
-
+<script src="/bootstrap/jquery.js" charset="UTF-8"></script>
 <script src="../../layui/layui.js"></script>
 <script>
     layui.use(['element', 'carousel'], function () {
@@ -120,6 +121,22 @@
         });
 
     });
+
+    function comment() {
+        var str = $(".comment-text").val();
+        $.ajax({
+            type: "post",
+            url: "/addcomment",
+            data: {
+                data: str,
+                id:<%=forum.getId()%>
+            },
+            success: function (result) {
+                location.reload();
+            }
+        });
+        return true;
+    }
 </script>
 </body>
 </html>

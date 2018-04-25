@@ -17,11 +17,11 @@
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     ParsePosition parsePosition = new ParsePosition(0);
     Date date = dateFormat.parse(blog.getTime(), parsePosition);
+    List<Blog> blogs= (List<Blog>) request.getAttribute("authorblog");
 %>
 <html>
 <head>
-    <title><%=blog.getTitle()%>
-    </title>
+    <title><%=blog.getTitle()%></title>
     <link rel="stylesheet" href="../../layui/css/layui.css">
     <link rel="stylesheet" href="../../css/all.css">
     <style>
@@ -70,16 +70,16 @@
                 <%
                     if (((User)session.getAttribute("user"))!=null){
                 %>
-                <form class="layui-form">
+                <%--<form class="layui-form">--%>
                     <div class="layui-form-item">
                         <div class="layui-input-block">
-                            <textarea placeholder="请输入内容" class="layui-textarea"></textarea>
+                            <textarea placeholder="请输入内容" class="layui-textarea comment-input"></textarea>
                         </div>
                     </div>
                     <div class="layui-form-item">
-                        <button class="layui-btn" style="float: right">提交评论</button>
+                        <button class="layui-btn" style="float: right" onclick="comment()">提交评论</button>
                     </div>
-                </form>
+                <%--</form>--%>
                 <%
                     }else {
                 %>
@@ -101,7 +101,7 @@
                     <div style="margin-left: 30px">
                         <%=comments.get(i).getContent()%>
                     </div>
-                    <hr class="layui-bg-gray">
+                    <%--<hr class="layui-bg-gray">--%>
                 </div>
                 <%
                     }
@@ -112,9 +112,7 @@
         <div class="layui-col-lg2">
             <div style="margin-left: 15px;padding: 25px" class="write-backgroud">
                 <div class="layui-row">
-                    <div class="layui-col-lg5"><img src="../../img/userimg/<%=blog.getAuthor().getImg()%>"
-                                                    style="height:65px;width: 65px"
-                                                    class="layui-circle"></div>
+                    <div class="layui-col-lg5"><img src="../../img/userimg/<%=blog.getAuthor().getImg()%>" style="height:65px;width: 65px" class="layui-circle"></div>
                     <div class="layui-col-lg7">
                         <a href="index.jsp" style="font-size: 20px"><%=blog.getAuthor().getNickname()%>
                         </a>
@@ -147,10 +145,10 @@
                 </div>
                 <ul style="margin-top: -15px">
                     <%
-                        for (int i = 0; i < 5; i++) {
+                        for (int i = 0; i <blogs.size(); i++) {
                     %>
                     <li style="margin-top: 15px">
-                        <a href="/details/2">如何用分片技术把7笔/秒的区块链交易提升到2488笔/秒</a>
+                        <a href="/details/<%=blogs.get(i).getId()%>"><%=blogs.get(i).getTitle()%></a>
                     </li>
                     <%
                         }
@@ -198,6 +196,18 @@
                 }
             }
         })
+    }
+    function comment() {
+        var  str=$(".comment-input").val();
+        $.ajax({
+            type:"post",
+            url:"/addcomment/<%=blog.getId()%>",
+            data:{data:str,id:12},
+            success:function (result) {
+            }
+        });
+        location.reload();
+        return false;
     }
 </script>
 </body>

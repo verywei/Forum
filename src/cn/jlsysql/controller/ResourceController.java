@@ -1,8 +1,12 @@
 package cn.jlsysql.controller;
 
+import cn.jlsysql.entity.Resource;
 import cn.jlsysql.entity.User;
+import cn.jlsysql.pojo.AddResourceComment;
 import cn.jlsysql.pojo.FileUp;
 import cn.jlsysql.pojo.AddResource;
+import cn.jlsysql.service.CommentService;
+import cn.jlsysql.service.FollowService;
 import cn.jlsysql.service.ResourceService;
 import cn.jlsysql.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Date;
@@ -42,6 +47,10 @@ import java.util.Date;
 public class ResourceController {
     @Autowired
     ResourceService resourceService;
+    @Autowired
+    CommentService commentService;
+    @Autowired
+    FollowService followService;
     @RequestMapping("/resource")
     public ModelAndView resource(ModelAndView modelAndView){
         modelAndView.setViewName("resource");
@@ -50,9 +59,14 @@ public class ResourceController {
         return  modelAndView;
     }
     @RequestMapping("/filedownload/{id}")
-    public  ModelAndView filedownload(@PathVariable String id, ModelAndView modelAndView){
+    public  ModelAndView filedownload(@PathVariable String id, ModelAndView modelAndView,HttpSession session){
         modelAndView.setViewName("filedownload");
-        modelAndView.addObject("resource",resourceService.getResourceById(id));
+        Resource resource=resourceService.getResourceById(id);
+        User user= (User) session.getAttribute("user");
+        boolean is=followService.canFollow(resource.getAuthor().getId(), user==null?"0":user.getId());
+        System.out.println(is);
+        modelAndView.addObject("canfollow",is);
+        modelAndView.addObject("resource",resource);
         return modelAndView;
     }
     @RequestMapping("/fileupload")
@@ -62,7 +76,7 @@ public class ResourceController {
     }
     @RequestMapping("/submitfile")
     public ModelAndView submitFile(ModelAndView modelAndView, FileUp fileUp, HttpServletRequest request, HttpSession session) throws IOException {
-        modelAndView.setViewName("filedownload");
+//        modelAndView.setViewName("filedownload");
         String url="";
         if(fileUp.getFile()!=null){
              url=FileUtil.saveFile(request, fileUp.getFile(),"/resource/");
@@ -77,8 +91,19 @@ public class ResourceController {
         addResource.setUrl(url);
         addResource.setContent(fileUp.getContent());
         resourceService.addResource(addResource);
+//        modelAndView.addObject("resources",resourceService.getAllResorce(""+1,""+10));
+        modelAndView.setViewName("resource");
         modelAndView.addObject("resources",resourceService.getAllResorce(""+1,""+10));
+        modelAndView.addObject("resource_by_time",resourceService.getResorceByTime(""+1,""+10));
         return modelAndView;
     }
-
+    @RequestMapping("/addresourcecomment/{id}")
+    public void addResourceComment(@PathVariable String id,HttpServletRequest request, HttpServletResponse response,HttpSession session) throws IOException {
+        AddResourceComment addResourceComment=new AddResourceComment();
+        addResourceComment.setAuthor(Integer.parseInt((((User)session.getAttribute("user")).getId())));
+        addResourceComment.setContent(request.getParameter("data"));
+        addResourceComment.setResource_id(Integer.parseInt(id));
+        commentService.addResourceComment(addResourceComment);
+        response.getWriter().write("ok");
+    }
 }

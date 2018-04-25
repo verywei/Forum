@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jlsysql.dao.ForumDao">
+    <resultMap id="forums" type="forum">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="content" property="content"/>
+        <result column="time" property="time"/>
+        <result column="kind" property="kind"/>
+        <association property="author" column="author" select="cn.jlsysql.dao.UserDao.getUserById"/>
+        <collection property="comment" column="id" select="cn.jlsysql.dao.ForumCommentDao.getForumCOmmentById"/>
+    </resultMap>
+    <select id="getAllForum" resultMap="forums">
+        SELECT * FROM forum;
+    </select>
+    <select id="getForumById" parameterType="int" resultMap="forums">
+        SELECT * FROM forum WHERE id=#{id}
+    </select>
+    <select id="getForumByKind" parameterType="int" resultMap="forums">
+        SELECT * FROM forum WHERE kind={kind}
+    </select>
+    <select id="getForumKindCount" resultType="forumKindCount">
+        select kind,count(kind) count from forum group by kind;
+    </select>
+    <insert id="addForum" parameterType="addBlog">
+        INSERT  INTO forum(title,content,time,author,kind) VALUES (#{title},#{content},now(),#{author},#{kind})
+    </insert>
+</mapper>

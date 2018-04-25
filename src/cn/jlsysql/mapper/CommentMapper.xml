@@ -12,6 +12,9 @@
         <association property="author" column="author" select="cn.jlsysql.dao.UserDao.getUserById"/>
     </resultMap>
     <select id="getCommentByBlog" parameterType="string" resultMap="commentMap">
-        select * from comment where blog_id=#{blog}
+        select * from comment where blog_id=#{blog} ORDER BY time DESC
     </select>
+    <insert id="addComment" parameterType="addComment">
+        INSERT  INTO  comment (time ,author,content,blog_id) VALUES (now() ,#{author},#{content},#{blog_id})
+    </insert>
 </mapper>

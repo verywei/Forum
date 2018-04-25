@@ -1,6 +1,7 @@
 package cn.jlsysql.dao;
 
 import cn.jlsysql.entity.Blog;
+import cn.jlsysql.pojo.AddBlog;
 
 import java.util.List;
 
@@ -29,5 +30,8 @@ import java.util.List;
 public interface BlogDao {
     List<Blog> getAllBlogs();
     List<Blog> getBlogByKind(int kind);
+    List<Blog> getBlogByAuthor(int author);
     Blog getBlogById(String id);
+    void addBlog(AddBlog addBlog);
+    void addVisit(int id);
 }

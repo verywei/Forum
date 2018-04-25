@@ -2,6 +2,7 @@ package cn.jlsysql.service.impl;
 
 import cn.jlsysql.dao.UserDao;
 import cn.jlsysql.entity.User;
+import cn.jlsysql.pojo.ChangePassword;
 import cn.jlsysql.pojo.LoginUser;
 import cn.jlsysql.pojo.RegistUser;
 import cn.jlsysql.service.UserService;
@@ -55,5 +56,16 @@ public class UserSeviceImpl implements UserService {
         user1.setPassword(user.getPassword());
         userDao.addUser(user1);
         return true;
+    }
+
+    @Override
+    public boolean changePassword(ChangePassword changePassword,String username) {
+        User user=userDao.getUser(username);
+        if (user.getPassword().equals(changePassword.getOldPass())&&changePassword.getNewPass().equals(changePassword.getConfirmPass())){
+            changePassword.setOldPass(username);
+            userDao.changePassword(changePassword);
+            return true;
+        }
+        return false;
     }
 }

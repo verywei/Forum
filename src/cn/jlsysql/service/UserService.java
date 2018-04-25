@@ -1,6 +1,7 @@
 package cn.jlsysql.service;
 
 import cn.jlsysql.entity.User;
+import cn.jlsysql.pojo.ChangePassword;
 import cn.jlsysql.pojo.LoginUser;
 import cn.jlsysql.pojo.RegistUser;
 
@@ -31,4 +32,5 @@ import javax.servlet.http.HttpSession;
 public interface UserService {
     boolean checkUser(LoginUser user, HttpSession session);
     boolean addUser(RegistUser user);
+    boolean changePassword(ChangePassword changePassword,String username);
 }

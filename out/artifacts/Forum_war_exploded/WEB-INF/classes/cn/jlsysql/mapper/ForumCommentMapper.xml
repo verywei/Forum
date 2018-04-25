@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.jlsysql.dao.ForumCommentDao">
+    <resultMap id="comments" type="forumComment">
+        <id column="id" property="id"/>
+        <result column="content" property="content"/>
+        <result column="time" property="time"/>
+        <result column="praise" property="praise"/>
+        <association property="author" column="author" select="cn.jlsysql.dao.UserDao.getUserById"/>
+    </resultMap>
+    <select id="getForumCOmmentById" parameterType="int" resultMap="comments">
+        SELECT * FROM forum_comment WHERE forum=#{id}
+    </select>
+    <insert id="addForumComment" parameterType="addForumComment">
+        INSERT  INTO  forum_comment(author,content,time,praise,forum) VALUES (#{author},#{content},now(),#{praise},#{forum})
+    </insert>
+</mapper>

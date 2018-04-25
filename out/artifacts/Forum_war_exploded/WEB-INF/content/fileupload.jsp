@@ -61,7 +61,7 @@
                     <div style="font-size: 12px">资源数量:<span><%=user.getResource_amount()%></span></div>
                 </div>
                 <div style="text-align: center;">
-                    <button class="layui-btn" style="margin-top: 5px">关注</button>
+                    <%--<button class="layui-btn" style="margin-top: 5px">关注</button>--%>
                 </div>
             </div>
             <div style="background-color:#ffffff;margin-top: 10px;padding: 9px;margin-left: 15px">

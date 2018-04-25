@@ -20,13 +20,11 @@
     <link rel="stylesheet" href="../../css/all.css">
     <%--<link rel="stylesheet" href="bootstrap/css/bootstrap.css">--%>
 </head>
-<body >
+<body>
 <div class="layui-layout layui-layout-admin">
     <!--header-->
-    <%@include file="part/header.jsp"%>
+    <%@include file="part/header.jsp" %>
     <!--header end-->
-
-
     <div class="layui-main">
         <div class="layui-row">
             <div class="layui-col-lg2" style="text-align: right;">
@@ -56,35 +54,41 @@
                     </colgroup>
                     <tbody>
                     <%
-                        List<Blog> blogs= (List<Blog>) request.getAttribute("blogs");
-                        SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy-MM-dd");
+                        List<Blog> blogs = (List<Blog>) request.getAttribute("blogs");
+                        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
                         ParsePosition pos = new ParsePosition(0);
-                        for (int i = 0; i < blogs.size(); i++) {
-                            Date date=dateFormat.parse(blogs.get(i).getTime(),pos);
+                        int size=blogs.size();
+                        for (int i = 0; i < size; i++) {
+                            Date date = dateFormat.parse(blogs.get(i).getTime(), pos);
                     %>
                     <tr style="height: 95px">
                         <td>
                             <div>
-                                <div><a href="/details/<%=blogs.get(i).getId()%>" style="margin-left: 15px;font-size: 23px;margin-top: 5px;"><%=blogs.get(i).getTitle()%></a>
+                                <div><a href="/details/<%=blogs.get(i).getId()%>"
+                                        style="margin-left: 15px;font-size: 23px;margin-top: 5px;"><%=blogs.get(i).getTitle()%>
+                                </a>
                                 </div>
                                 <ul style="margin-top: 10px">
-                                    <li style="display: inline-block;margin-left: 25px;"><a href="#  "
-                                                                                            style="color: #1E9FFF;"><%=Kind.getKind1(Integer.parseInt(blogs.get(i).getKind())).getName()%></a>
+                                    <li style="display: inline-block;margin-left: 25px;"><a href="#" style="color: #1E9FFF;"><%=Kind.getKind1(Integer.parseInt(blogs.get(i).getKind())).getName()%>
+                                    </a>
                                     </li>
                                     <li style="display: inline-block;margin-left: 50px;"><a href="#"><i
-                                            class="layui-icon" style="size: 11px;">&#xe6af;</i><%=blogs.get(i).getAuthor().getNickname()%></a></li>
-                                    <li style="display: inline-block;margin-left: 50px;"><%=blogs.get(i).getTime()%></li>
+                                            class="layui-icon"
+                                            style="size: 11px;">&#xe6af;</i><%=blogs.get(i).getAuthor().getNickname()%>
+                                    </a></li>
+                                    <li style="display: inline-block;margin-left: 50px;"><%=blogs.get(i).getTime()%>
+                                    </li>
                                 </ul>
                                 <div style="float: right;margin-top: -50px">
-                                    <div style="text-align: center;color: #1E9FFF"><%=blogs.get(i).getVisit()%></div>
+                                    <div style="text-align: center;color: #1E9FFF"><%=blogs.get(i).getVisit()%>
+                                    </div>
                                     <div>阅读量</div>
                                 </div>
                             </div>
                         </td>
                     </tr>
                     <%
-                        }
-                        ;
+                        };
                     %>
                     </tbody>
                 </table>
@@ -93,9 +97,12 @@
                 <div style="margin-left: 10px;margin-top: 10px">
                     <div class="layui-carousel" id="test1" lay-filter="test1">
                         <div carousel-item="">
-                            <div class="layui-bg-cyan"><img src="../../img/img1.jpg" style="width: 295px;height: 150px"></div>
-                            <div class="layui-bg-cyan"><img src="../../img/img2.jpg" style="width: 295px;height: 150px"></div>
-                            <div class="layui-bg-cyan"><img src="../../img/img3.jpg" style="width: 295px;height: 150px"></div>
+                            <div class="layui-bg-cyan"><img src="../../img/img1.jpg" style="width: 295px;height: 150px">
+                            </div>
+                            <div class="layui-bg-cyan"><img src="../../img/img2.jpg" style="width: 295px;height: 150px">
+                            </div>
+                            <div class="layui-bg-cyan"><img src="../../img/img3.jpg" style="width: 295px;height: 150px">
+                            </div>
                         </div>
                     </div>
                     <div style="background-color:#ffffff;width:278px;margin-top: 10px;padding: 9px">

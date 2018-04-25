@@ -20,6 +20,10 @@
         <div class="layui-col-lg3">&nbsp;</div>
         <div class="layui-col-lg6">
             <div style="background-color: #FFFFFF;height: 320px">
+
+                <%
+                    if (request.getAttribute("changepass")==null){
+                %>
                 <div class="layui-tab">
                     <ul class="layui-tab-title">
                         <li class="layui-this">密码设置</li>
@@ -27,7 +31,7 @@
                     </ul>
                     <div class="layui-tab-content" style="padding: 15px">
                         <div class="layui-tab-item layui-show">
-                            <form:form modelAttribute="changePassword" cssClass="layui-form" action="" method="post"
+                            <form:form modelAttribute="changePassword" cssClass="layui-form" action="/changepass" method="post"
                                        cssStyle="width: 450px; ">
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">旧密码</label>
@@ -84,6 +88,17 @@
                         </div>
                     </div>
                 </div>
+                <%
+                    }else if ((boolean)request.getAttribute("changepass")){
+                %>
+                    修改成功
+                <%
+                    }else if (!(boolean)request.getAttribute("changepass")){
+                %>
+                修改失败
+                <%
+                    }
+                %>
             </div>
         </div>
         <div class="layui-col-lg3">&nbsp;</div>

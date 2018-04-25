@@ -236,5 +236,14 @@
         <SOURCES />
       </library>
     </orderEntry>
+    <orderEntry type="module-library" scope="TEST">
+      <library>
+        <CLASSES>
+          <root url="jar://G:/SPRING/spring-framework-5.0.2.RELEASE/libs/jar/spring-webflux-5.0.2.RELEASE.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

@@ -1,5 +1,7 @@
 package cn.jlsysql.dao;
 
+import cn.jlsysql.pojo.AddResourceComment;
+
 import java.util.List;
 
 /*
@@ -26,4 +28,5 @@ import java.util.List;
 */
 public interface ResourceCommentDao {
     List<ResourceCommentDao> getResourceCommentById(String id);
+    void addResourceComment(AddResourceComment addResourceComment);
 }

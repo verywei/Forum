@@ -15,5 +15,7 @@
     <select id="getResourceCommentById" parameterType="string" resultMap="resourceCommentMap">
         SELECT * FROM resource_comment WHERE  resource_id=#{id}
     </select>
-
+    <insert id="addResourceComment" parameterType="addResourceComment">
+        INSERT  INTO  resource_comment(time,author,content,resource_id) VALUES (now(),#{author},#{content},#{resource_id})
+    </insert>
 </mapper>

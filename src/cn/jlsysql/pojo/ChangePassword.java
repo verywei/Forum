@@ -2,6 +2,9 @@ package cn.jlsysql.pojo;
 
 import org.springframework.stereotype.Component;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 /*
                            _ooOoo_
                           o8888888o
@@ -26,8 +29,11 @@ import org.springframework.stereotype.Component;
 */
 @Component
 public class ChangePassword {
+    @NotBlank(message = "不能为空")
     String oldPass;
+    @NotBlank(message = "不能为空")
     String newPass;
+    @NotBlank(message = "不能为空")
     String confirmPass;
 
     public String getOldPass() {

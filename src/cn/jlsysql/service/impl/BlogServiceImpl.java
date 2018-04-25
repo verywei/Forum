@@ -2,6 +2,7 @@ package cn.jlsysql.service.impl;
 
 import cn.jlsysql.dao.BlogDao;
 import cn.jlsysql.entity.Blog;
+import cn.jlsysql.pojo.AddBlog;
 import cn.jlsysql.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -42,12 +43,23 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Blog getBlogByid(String id) {
+        Blog blog=blogDao.getBlogById(id);
+        blogDao.addVisit(Integer.parseInt(id));
+        return blog;
+    }
 
-        return blogDao.getBlogById(id);
+    @Override
+    public List<Blog> getBlogByAuthor(int author) {
+        return blogDao.getBlogByAuthor(author);
     }
 
     @Override
     public List<Blog> getBlogByKind(int kind) {
         return blogDao.getBlogByKind(kind);
+    }
+
+    @Override
+    public void addBlog(AddBlog addBlog) {
+        blogDao.addBlog(addBlog);
     }
 }

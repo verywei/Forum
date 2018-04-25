@@ -51,38 +51,43 @@
             </div>
             <div style=" background-color: #FFFFFF;padding: 20px 20px 5px 20px" class="critic">
                 <%
+                    if (((User)session.getAttribute("user"))!=null){
+                %>
+                <%--<form class="layui-form">--%>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                        <textarea placeholder="请输入内容" class="layui-textarea comment-input"></textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <button class="layui-btn" style="float: right" onclick="comment()">提交评论</button>
+                </div>
+                <%--</form>--%>
+                <%
+                }else {
+                %>
+                <div style="text-align: center ;padding: 0px 0px 15px 0px">您还没有登录，请<a href="/login" style="color: #1E9FFF"> [登录]</a></div>
+                <%
+                    }
+                %>
+                <%
                     for (int i=0;i<resource.getComments().size();i++){
                 %>
+
                 <div>
+                    <hr class="layui-bg-gray">
                     <img src="../../img/userimg/<%=resource.getComments().get(i).getAuthor().getImg()%>" class="layui-circle" style="width: 30px;height: 30px"><a href="#"
                                                                                                            style="margin-left: 10px"><%=resource.getComments().get(i).getAuthor().getNickname()%></a><span
                         style="margin-left: 25px;"><%=resource.getComments().get(i).getTime()%></span>
                     <div style="margin-left: 30px">
                         <%=resource.getComments().get(i).getContent()%>
                     </div>
-                    <hr class="layui-bg-gray">
+
                 </div>
                 <%
                     }
                 %>
-                <%--<div>--%>
-                    <%--<img src="../../img/img1.jpg" class="layui-circle" style="width: 30px;height: 30px"><a href="#"--%>
-                                                                                                           <%--style="margin-left: 10px">weiwei</a><span--%>
-                        <%--style="margin-left: 25px;">2017年12月2日</span>--%>
-                    <%--<div style="margin-left: 30px">--%>
-                        <%--现在已经很清晰了，用Spring可以让各个模块耦合更松散，可以在业务逻辑之外进行增强代理，实现非业务功能。所以就算没了Spring，也会有类似的其他框架来实现这些目的，而现在Spring的生态比较大，社区又比较活跃，为什么不用呢？--%>
-                    <%--</div>--%>
-                    <%--<hr class="layui-bg-gray">--%>
-                <%--</div>--%>
-                <%--<div>--%>
-                    <%--<img src="../../img/img1.jpg" class="layui-circle" style="width: 30px;height: 30px"><a href="#"--%>
-                                                                                                           <%--style="margin-left: 10px">weiwei</a><span--%>
-                        <%--style="margin-left: 25px;">2017年12月2日</span>--%>
-                    <%--<div style="margin-left: 30px">--%>
-                        <%--现在已经很清晰了，用Spring可以让各个模块耦合更松散，可以在业务逻辑之外进行增强代理，实现非业务功能。所以就算没了Spring，也会有类似的其他框架来实现这些目的，而现在Spring的生态比较大，社区又比较活跃，为什么不用呢？--%>
-                    <%--</div>--%>
-                    <%--<hr class="layui-bg-gray">--%>
-                <%--</div>--%>
+                <hr class="layui-bg-gray">
             </div>
         </div>
         <div class="layui-col-lg2">
@@ -93,7 +98,18 @@
                     <div style="font-size: 12px">资源数量:<span><%=resource.getAuthor().getResource_amount()%></span></div>
                 </div>
                 <div style="text-align: center;">
-                    <button class="layui-btn" style="margin-top: 5px">关注</button>
+                    <%
+                        boolean canfollow= (boolean) request.getAttribute("canfollow");
+                        if (canfollow){
+                    %>
+                    <button class="layui-btn" style="margin-top: 5px" onclick="ssss()">关注</button>
+                    <%
+                        }else {
+                    %>
+                    <button class="layui-btn layui-btn-disabled" style="margin-top: 5px">关注</button>
+                    <%
+                        }
+                    %>
                 </div>
             </div>
             <div style="background-color:#ffffff;margin-top: 10px;padding: 9px;margin-left: 15px">
@@ -113,12 +129,36 @@
 
 </div>
 
-
+<script src="/bootstrap/jquery.js" charset="UTF-8"></script>
 <script src="../../layui/layui.js"></script>
 <script>
     layui.use('element', function () {
         var element = layui.element;
     })
+    function comment() {
+        var  str=$(".comment-input").val();
+        $.ajax({
+            type:"post",
+            url:"/addresourcecomment/<%=resource.getId()%>",
+            data:{data:str,id:12},
+            success:function (result) {
+            }
+        });
+        location.reload();
+        return false;
+    }
+    function ssss() {
+        $.ajax({
+            type: "post",
+            url: "/focus?followed=<%=resource.getAuthor().getId()%>",
+            success: function (result) {
+                if (result == 'ok') {
+                    $("#focus").addClass(" layui-btn-disabled ")
+                }
+                location.reload();
+            }
+        })
+    }
 </script>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package cn.jlsysql.service;
 
 import cn.jlsysql.entity.Blog;
+import cn.jlsysql.pojo.AddBlog;
 
 import java.util.List;
 
@@ -29,5 +30,7 @@ import java.util.List;
 public interface BlogService {
     public List<Blog> getAllBlogs();
     public Blog getBlogByid(String id);
+    public List<Blog> getBlogByAuthor(int author);
     public List<Blog> getBlogByKind(int kind);
+    public void  addBlog(AddBlog addBlog);
 }

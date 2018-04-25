@@ -1,6 +1,7 @@
 package cn.jlsysql.dao;
 
 import cn.jlsysql.entity.Comment;
+import cn.jlsysql.pojo.AddComment;
 
 import java.util.List;
 
@@ -28,4 +29,5 @@ import java.util.List;
 */
 public interface CommentDao {
     List<Comment> getCommentByBlog(String blog);
+    void  addComment(AddComment addComment);
 }

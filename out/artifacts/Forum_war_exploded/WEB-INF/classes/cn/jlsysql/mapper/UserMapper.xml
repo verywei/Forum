@@ -11,4 +11,7 @@
     <insert id="addUser" parameterType="user">
         INSERT  INTO user( username,password ,img ,book_amount,resource_amount, nickname) VALUES (#{username},#{password},'defaults.jpg',0,0,#{username})
     </insert>
+    <update id="changePassword" parameterType="changePassword">
+        UPDATE user SET  password=#{newPass} WHERE username=#{oldPass}
+    </update>
 </mapper>
