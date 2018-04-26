@@ -9,9 +9,12 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    Forum forum = (Forum) request.getAttribute("forum");
+%>
 <html>
 <head>
-    <title>Title</title>
+    <title><%=forum.getContent()%></title>
     <link rel="stylesheet" href="../../layui/css/layui.css">
     <link rel="stylesheet" href="../../css/all.css">
     <style>
@@ -30,9 +33,7 @@
 <div class="layui-layout layui-layout-admin">
     <!--header-->
     <%@include file="part/header.jsp" %>
-    <%
-        Forum forum = (Forum) request.getAttribute("forum");
-    %>
+
     <!--header end-->
     <div class="layui-row" style="margin-top: 10px;min-height: 643px">
         <div class="layui-col-lg2">&nbsp;</div>

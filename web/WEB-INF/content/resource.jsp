@@ -10,7 +10,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Title</title>
+    <title>资源下载</title>
     <link rel="stylesheet" href="../../layui/css/layui.css">
     <link rel="stylesheet" href="../../css/all.css">
 </head>

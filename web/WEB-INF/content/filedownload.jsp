@@ -8,16 +8,17 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    Resource resource= (Resource) request.getAttribute("resource");
+%>
 <html>
 <head>
-    <title>Title</title>
+    <title><%=resource.getName()%></title>
     <link rel="stylesheet" href="../../layui/css/layui.css">
     <link rel="stylesheet" href="../../css/all.css">
 </head>
 <body>
-<%
-    Resource resource= (Resource) request.getAttribute("resource");
-%>
+
 <div class="layui-layout layui-layout-admin">
     <!--header-->
     <%@include file="part/header.jsp"%>

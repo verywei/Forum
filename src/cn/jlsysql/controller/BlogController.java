@@ -4,9 +4,7 @@ import cn.jlsysql.entity.Blog;
 import cn.jlsysql.entity.User;
 import cn.jlsysql.pojo.AddBlog;
 import cn.jlsysql.pojo.AddComment;
-import cn.jlsysql.service.BlogService;
-import cn.jlsysql.service.CommentService;
-import cn.jlsysql.service.FollowService;
+import cn.jlsysql.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -50,6 +49,8 @@ public class BlogController {
     FollowService followService;
     @Autowired
     CommentService commentService;
+    @Autowired
+    ResourceService resourceService;
 
     @RequestMapping("/")
     public ModelAndView index(ModelAndView modelAndView){
@@ -104,4 +105,12 @@ public class BlogController {
         commentService.addComment(addComment);
         response.getWriter().write("ok");
     }
+    @RequestMapping("/myblog")
+    public ModelAndView getMyBlog(ModelAndView modelAndView,HttpSession session){
+        modelAndView.setViewName("myblog");
+        modelAndView.addObject("resource",resourceService.getAllResorce("1","10"));
+        modelAndView.addObject("blog",blogService.getBlogByAuthor(Integer.parseInt(((User)session.getAttribute("user")).getId())));
+        return modelAndView;
+    }
+
 }

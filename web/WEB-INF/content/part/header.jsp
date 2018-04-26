@@ -27,7 +27,7 @@
                 <%=user.getNickname()%>
             </a>
             <dl class="layui-nav-child">
-                <dd><a href="">我的博客</a></dd>
+                <dd><a href="/myblog">我的博客</a></dd>
                 <dd><a href="/usersetting">账号设置</a></dd>
                 <dd><a href="/logout">退出</a></dd>
             </dl>
