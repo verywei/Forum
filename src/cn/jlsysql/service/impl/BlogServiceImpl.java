@@ -5,7 +5,12 @@ import cn.jlsysql.entity.Blog;
 import cn.jlsysql.pojo.AddBlog;
 import cn.jlsysql.service.BlogService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
+import redis.clients.jedis.Jedis;
+import redis.clients.jedis.JedisPool;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -37,15 +42,21 @@ public class BlogServiceImpl implements BlogService {
     @Autowired
     BlogDao blogDao;
     @Override
+    @Cacheable(value="common",key="'all_blog'")
     public List<Blog> getAllBlogs() {
         return blogDao.getAllBlogs();
     }
 
     @Override
     public Blog getBlogByid(String id) {
-        Blog blog=blogDao.getBlogById(id);
+        Blog blog = blogDao.getBlogById(id);
         blogDao.addVisit(Integer.parseInt(id));
         return blog;
+    }
+
+    @Override
+    public List getBlogByPage(int page) {
+        return blogDao.getBlogByPage((page - 1) * 20);
     }
 
     @Override

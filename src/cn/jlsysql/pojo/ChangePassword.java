@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 /*
                            _ooOoo_
@@ -28,7 +29,7 @@ import javax.validation.constraints.NotNull;
                  佛祖保佑       永无BUG
 */
 @Component
-public class ChangePassword {
+public class ChangePassword implements Serializable {
     @NotBlank(message = "不能为空")
     String oldPass;
     @NotBlank(message = "不能为空")

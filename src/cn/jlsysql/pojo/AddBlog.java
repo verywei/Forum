@@ -2,6 +2,8 @@ package cn.jlsysql.pojo;
 
 import org.springframework.stereotype.Service;
 
+import java.io.Serializable;
+
 /*
                            _ooOoo_
                           o8888888o
@@ -25,7 +27,7 @@ import org.springframework.stereotype.Service;
                  佛祖保佑       永无BUG
 */
 @Service
-public class AddBlog {
+public class AddBlog implements Serializable {
     String title,content;
     int kind,author;
 

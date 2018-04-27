@@ -1,5 +1,7 @@
 package cn.jlsysql.entity;
 
+import java.io.Serializable;
+
 /*
                            _ooOoo_
                           o8888888o
@@ -22,7 +24,7 @@ package cn.jlsysql.entity;
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                  佛祖保佑       永无BUG
 */
-public class ResourceComment {
+public class ResourceComment implements Serializable {
     String id  ,time  ,se_commend,content ,comment_id,resource_id;
     User author;
 

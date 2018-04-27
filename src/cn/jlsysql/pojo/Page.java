@@ -2,6 +2,8 @@ package cn.jlsysql.pojo;
 
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+
 /*
                            _ooOoo_
                           o8888888o
@@ -25,7 +27,7 @@ import org.springframework.stereotype.Component;
                  佛祖保佑       永无BUG
 */
 @Component
-public class Page {
+public class Page implements Serializable {
     private   int page,limit;
 
     public int getPage() {

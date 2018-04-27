@@ -58,6 +58,15 @@ public class BlogController {
         modelAndView.addObject("blogs",blogService.getAllBlogs());
         return  modelAndView;
     }
+    @RequestMapping("/test")
+    public ModelAndView test(ModelAndView modelAndView){
+        modelAndView.setViewName("test");
+        return  modelAndView;
+    }
+
+
+
+
     @RequestMapping("/details/{id}")
     public  ModelAndView details(@PathVariable("id") String id, ModelAndView modelAndView, HttpSession session){
         modelAndView.setViewName("details");

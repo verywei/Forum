@@ -52,7 +52,7 @@
                         <col width="200">
                         <col>
                     </colgroup>
-                    <tbody>
+                    <tbody class="addtable">
                     <%
                         List<Blog> blogs = (List<Blog>) request.getAttribute("blogs");
                         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
@@ -92,6 +92,7 @@
                     %>
                     </tbody>
                 </table>
+                <div style="width: 740px;height: 40px;background-color: #FFFFFF;text-align: center"><button class="layui-btn addrow" style="width: 745px">加载更多</button></div>
             </div>
             <div class="layui-col-lg4">
                 <div style="margin-left: 10px;margin-top: 10px">
@@ -136,13 +137,16 @@
                             吉ICP备17008925号
                         </div>
                     </div>
+                    <table class="table-add">
+                        <tr><td>asdasdasd</td></tr>
+                    </table>
                 </div>
 
             </div>
         </div>
     </div>
 </div>
-
+<script src="/bootstrap/jquery.js" charset="UTF-8"></script>
 <script src="../../layui/layui.js"></script>
 <script>
     layui.use(['element', 'carousel'], function () {
@@ -156,6 +160,40 @@
         });
 
     });
+    $(function () {
+        var page=1;
+        $(".addrow").click(function () {
+            for (i = 0;i<10;i++){
+                $(".addtable").append('<tr style="height: 95px">\n' +
+                    '                        <td>\n' +
+                    '                            <div>\n' +
+                    '                                <div><a href="/details/1"\n' +
+                    '                                        style="margin-left: 15px;font-size: 23px;margin-top: 5px;">ww\n' +
+                    '                                </a>\n' +
+                    '                                </div>\n' +
+                    '                                <ul style="margin-top: 10px">\n' +
+                    '                                    <li style="display: inline-block;margin-left: 25px;"><a href="#" style="color: #1E9FFF;">ww\n' +
+                    '                                    </a>\n' +
+                    '                                    </li>\n' +
+                    '                                    <li style="display: inline-block;margin-left: 50px;"><a href="#"><i\n' +
+                    '                                            class="layui-icon"\n' +
+                    '                                            style="size: 11px;">&#xe6af;</i>ww\n' +
+                    '                                    </a></li>\n' +
+                    '                                    <li style="display: inline-block;margin-left: 50px;">ww\n' +
+                    '                                    </li>\n' +
+                    '                                </ul>\n' +
+                    '                                <div style="float: right;margin-top: -50px">\n' +
+                    '                                    <div style="text-align: center;color: #1E9FFF">12\n' +
+                    '                                    </div>\n' +
+                    '                                    <div>阅读量</div>\n' +
+                    '                                </div>\n' +
+                    '                            </div>\n' +
+                    '                        </td>\n' +
+                    '                    </tr>');
+            }
+        page++;
+        });
+    })
 </script>
 </body>
 </html>

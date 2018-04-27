@@ -3,6 +3,8 @@ package cn.jlsysql.pojo;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.Serializable;
+
 /*
                            _ooOoo_
                           o8888888o
@@ -26,7 +28,7 @@ import org.springframework.web.multipart.MultipartFile;
                  佛祖保佑       永无BUG
 */
 @Component
-public class PersonInfo {
+public class PersonInfo implements Serializable {
     String name;
     MultipartFile multipartFile;
 

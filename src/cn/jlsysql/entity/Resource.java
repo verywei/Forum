@@ -1,5 +1,6 @@
 package cn.jlsysql.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /*
@@ -24,7 +25,7 @@ import java.util.List;
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                  佛祖保佑       永无BUG
 */
-public class Resource {
+public class Resource implements Serializable {
     private String id, name , time,count,size;
     private User author ;
     private String url;

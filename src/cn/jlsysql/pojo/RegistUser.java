@@ -3,6 +3,7 @@ package cn.jlsysql.pojo;
 import org.springframework.stereotype.Component;
 
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 
 /*
                            _ooOoo_
@@ -27,7 +28,7 @@ import javax.validation.constraints.NotBlank;
                  佛祖保佑       永无BUG
 */
 @Component
-public class RegistUser {
+public class RegistUser implements Serializable {
     @NotBlank(message = "用户名不能为空")
     private String username;
     @NotBlank(message = "密码不能为空")

@@ -2,6 +2,8 @@ package cn.jlsysql.entity;
 
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+
 /*
                            _ooOoo_
                           o8888888o
@@ -25,7 +27,7 @@ import org.springframework.stereotype.Component;
                  佛祖保佑       永无BUG
 */
 @Component
-public class User {
+public class User implements Serializable {
 
     String id, username, password,img ,book_amount,resource_amount,nickname;
 

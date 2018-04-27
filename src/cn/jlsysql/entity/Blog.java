@@ -1,5 +1,6 @@
 package cn.jlsysql.entity;
 
+import java.io.Serializable;
 import java.util.List;
 
 /*
@@ -24,7 +25,7 @@ import java.util.List;
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                  佛祖保佑       永无BUG
 */
-public class Blog {
+public class Blog implements Serializable{
     String id, title, time, kind, visit, content;
     User author;
     List<Comment> comments;

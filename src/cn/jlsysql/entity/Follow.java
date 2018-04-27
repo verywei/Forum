@@ -2,6 +2,8 @@ package cn.jlsysql.entity;
 
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+
 /*
                            _ooOoo_
                           o8888888o
@@ -25,7 +27,7 @@ import org.springframework.stereotype.Component;
                  佛祖保佑       永无BUG
 */
 
-public class Follow {
+public class Follow implements Serializable {
     User followed,follower;
 
     public User getFollowed() {

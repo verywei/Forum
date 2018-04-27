@@ -20,7 +20,9 @@
     <select id="getBlogById" resultMap="blogMap">
         SELECT * FROM blog WHERE id=#{id}
     </select>
-
+    <select id="getBlogByPage" parameterType="int" resultMap="blogMap">
+        SELECT  * FROM  blog limit #{page},20
+    </select>
     <select id="getBlogByAuthor" parameterType="int" resultMap="blogMap">
         SELECT * FROM blog WHERE author=#{author}  LIMIT 5
     </select>

@@ -1,5 +1,6 @@
 package cn.jlsysql.entity;
 
+import java.io.Serializable;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /*
@@ -24,7 +25,7 @@ import java.util.concurrent.ArrayBlockingQueue;
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                  佛祖保佑       永无BUG
 */
-public class Comment {
+public class Comment implements Serializable {
     String id  ,time  ,se_commend,content ,comment_id,blog_id;
     User author;
 

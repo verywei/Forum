@@ -28,9 +28,10 @@ import java.util.List;
                  佛祖保佑       永无BUG
 */
 public interface BlogService {
-    public List<Blog> getAllBlogs();
-    public Blog getBlogByid(String id);
-    public List<Blog> getBlogByAuthor(int author);
-    public List<Blog> getBlogByKind(int kind);
-    public void  addBlog(AddBlog addBlog);
+    List<Blog> getAllBlogs();
+    Blog getBlogByid(String id);
+    List getBlogByPage(int page);
+    List<Blog> getBlogByAuthor(int author);
+    List<Blog> getBlogByKind(int kind);
+    void  addBlog(AddBlog addBlog);
 }

@@ -3,6 +3,8 @@ package cn.jlsysql.pojo;
 import cn.jlsysql.entity.User;
 import org.springframework.stereotype.Component;
 
+import java.io.Serializable;
+
 /*
                            _ooOoo_
                           o8888888o
@@ -26,7 +28,7 @@ import org.springframework.stereotype.Component;
                  佛祖保佑       永无BUG
 */
 @Component
-public class AddResource {
+public class AddResource implements Serializable {
     private int id,count,author;
     private String url, name , time,size,content;
 
