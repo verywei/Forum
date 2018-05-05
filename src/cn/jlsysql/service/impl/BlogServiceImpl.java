@@ -4,6 +4,7 @@ import cn.jlsysql.dao.BlogDao;
 import cn.jlsysql.entity.Blog;
 import cn.jlsysql.pojo.AddBlog;
 import cn.jlsysql.service.BlogService;
+import cn.jlsysql.util.Kind;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -42,9 +43,19 @@ public class BlogServiceImpl implements BlogService {
     @Autowired
     BlogDao blogDao;
     @Override
-    @Cacheable(value="common",key="'all_blog'")
+//    @Cacheable(value="common",key="'all_blog'")
     public List<Blog> getAllBlogs() {
         return blogDao.getAllBlogs();
+    }
+
+    @Override
+    public List<Blog> getAllBlogsByPage(String page) {
+        int pages=Integer.parseInt(page)*15;
+        List<Blog> blogs=blogDao.getAllBlogsByPage(pages);
+        for (Blog blog:blogs){
+            blog.setKind(Kind.getKind1(Integer.parseInt(blog.getKind())).getName());
+        }
+        return blogs;
     }
 
     @Override

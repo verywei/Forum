@@ -1,9 +1,5 @@
-package cn.jlsysql.service;
-
-import cn.jlsysql.entity.Blog;
-import cn.jlsysql.pojo.AddBlog;
-
-import java.util.List;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 /*
                            _ooOoo_
@@ -27,12 +23,8 @@ import java.util.List;
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                  佛祖保佑       永无BUG
 */
-public interface BlogService {
-    List<Blog> getAllBlogs();
-    List<Blog> getAllBlogsByPage(String page);
-    Blog getBlogByid(String id);
-    List getBlogByPage(int page);
-    List<Blog> getBlogByAuthor(int author);
-    List<Blog> getBlogByKind(int kind);
-    void  addBlog(AddBlog addBlog);
+public class Maim {
+    public static void main(String []args){
+
+    }
 }

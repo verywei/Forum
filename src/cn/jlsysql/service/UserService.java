@@ -33,4 +33,7 @@ public interface UserService {
     boolean checkUser(LoginUser user, HttpSession session);
     boolean addUser(RegistUser user);
     boolean changePassword(ChangePassword changePassword,String username);
+    boolean changeInfo(String id,String nickname,String img);
+    boolean changeBlogCount(String id,int count);
+    boolean changeResourceCount(String id,int count);
 }

@@ -65,18 +65,17 @@
                             </form:form>
                         </div>
                         <div class="layui-tab-item" >
-                            <form class="layui-form" style="width: 450px;">
+                            <form class="layui-form" style="width: 450px;" action="changeinfo" method="post" enctype="multipart/form-data">
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">选择图片</label>
                                     <div class="layui-input-block">
-                                        <input type="file">
+                                        <input type="file" name="multipartFile">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
                                     <label class="layui-form-label">昵称</label>
                                     <div class="layui-input-block">
-                                        <input type="text" name="nickname" autocomplete="off" placeholder="请输入昵称"
-                                               class="layui-input">
+                                        <input type="text" value="<%=user.getNickname()%>" name="name" autocomplete="off" placeholder="请输入昵称"class="layui-input">
                                     </div>
                                 </div>
                                 <div class="layui-form-item">
@@ -91,11 +90,11 @@
                 <%
                     }else if ((boolean)request.getAttribute("changepass")){
                 %>
-                    修改成功
+                <h1 style="margin-left: 275px;padding: 55px">修改成功</h1>
                 <%
                     }else if (!(boolean)request.getAttribute("changepass")){
                 %>
-                修改失败
+                <h1 style="margin-left: 275px;padding: 55px">修改失败</h1>
                 <%
                     }
                 %>

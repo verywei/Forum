@@ -137,9 +137,6 @@
                             吉ICP备17008925号
                         </div>
                     </div>
-                    <table class="table-add">
-                        <tr><td>asdasdasd</td></tr>
-                    </table>
                 </div>
 
             </div>
@@ -161,36 +158,49 @@
 
     });
     $(function () {
-        var page=1;
+        var page=0;
         $(".addrow").click(function () {
-            for (i = 0;i<10;i++){
-                $(".addtable").append('<tr style="height: 95px">\n' +
-                    '                        <td>\n' +
-                    '                            <div>\n' +
-                    '                                <div><a href="/details/1"\n' +
-                    '                                        style="margin-left: 15px;font-size: 23px;margin-top: 5px;">ww\n' +
-                    '                                </a>\n' +
-                    '                                </div>\n' +
-                    '                                <ul style="margin-top: 10px">\n' +
-                    '                                    <li style="display: inline-block;margin-left: 25px;"><a href="#" style="color: #1E9FFF;">ww\n' +
-                    '                                    </a>\n' +
-                    '                                    </li>\n' +
-                    '                                    <li style="display: inline-block;margin-left: 50px;"><a href="#"><i\n' +
-                    '                                            class="layui-icon"\n' +
-                    '                                            style="size: 11px;">&#xe6af;</i>ww\n' +
-                    '                                    </a></li>\n' +
-                    '                                    <li style="display: inline-block;margin-left: 50px;">ww\n' +
-                    '                                    </li>\n' +
-                    '                                </ul>\n' +
-                    '                                <div style="float: right;margin-top: -50px">\n' +
-                    '                                    <div style="text-align: center;color: #1E9FFF">12\n' +
-                    '                                    </div>\n' +
-                    '                                    <div>阅读量</div>\n' +
-                    '                                </div>\n' +
-                    '                            </div>\n' +
-                    '                        </td>\n' +
-                    '                    </tr>');
-            }
+            $.ajax({
+                url:'/getblogbypage',
+                type:'post',
+                async:true,
+                data:{page:page},
+                success:function (data) {
+                    var blogs=JSON.parse(data);
+                    var count=0;
+                    for (var item in blogs){
+                        $(".addtable").append('<tr style="height: 95px">\n' +
+                            '                        <td>\n' +
+                            '                            <div>\n' +
+                            '                                <div><a href="/details/'+blogs[count].id+'"\n' +
+                            '                                        style="margin-left: 15px;font-size: 23px;margin-top: 5px;">'+blogs[count].title+'\n' +
+                            '                                </a>\n' +
+                            '                                </div>\n' +
+                            '                                <ul style="margin-top: 10px">\n' +
+                            '                                    <li style="display: inline-block;margin-left: 25px;"><a href="#" style="color: #1E9FFF;">'+blogs[count].kind+'\n' +
+                            '                                    </a>\n' +
+                            '                                    </li>\n' +
+                            '                                    <li style="display: inline-block;margin-left: 50px;"><a href="#"><i\n' +
+                            '                                            class="layui-icon"\n' +
+                            '                                            style="size: 11px;">&#xe6af;</i>'+blogs[count].author.nickname+'\n' +
+                            '                                    </a></li>\n' +
+                            '                                    <li style="display: inline-block;margin-left: 50px;">'+blogs[count].time+'\n' +
+                            '                                    </li>\n' +
+                            '                                </ul>\n' +
+                            '                                <div style="float: right;margin-top: -50px">\n' +
+                            '                                    <div style="text-align: center;color: #1E9FFF">'+blogs[count].visit+'\n' +
+                            '                                    </div>\n' +
+                            '                                    <div>阅读量</div>\n' +
+                            '                                </div>\n' +
+                            '                            </div>\n' +
+                            '                        </td>\n' +
+                            '                    </tr>');
+                        count++;
+                    }
+
+                }
+
+            })
         page++;
         });
     })

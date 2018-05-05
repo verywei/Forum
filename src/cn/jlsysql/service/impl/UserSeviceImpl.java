@@ -2,9 +2,7 @@ package cn.jlsysql.service.impl;
 
 import cn.jlsysql.dao.UserDao;
 import cn.jlsysql.entity.User;
-import cn.jlsysql.pojo.ChangePassword;
-import cn.jlsysql.pojo.LoginUser;
-import cn.jlsysql.pojo.RegistUser;
+import cn.jlsysql.pojo.*;
 import cn.jlsysql.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -67,5 +65,48 @@ public class UserSeviceImpl implements UserService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean changeInfo(String id, String nickname, String img) {
+        ChangeInfo changeInfo=new ChangeInfo();
+        changeInfo.setId(Integer.parseInt(id));
+        changeInfo.setNickname(nickname);
+        changeInfo.setImg(img);
+        try {
+            userDao.changeInfo(changeInfo);
+        }catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public boolean changeBlogCount(String id, int count) {
+        try {
+            ChangeCount changeCount=new ChangeCount();
+            changeCount.setCount(count);
+            changeCount.setId(Integer.parseInt(id));
+            userDao.changeBlogCount(changeCount);
+        }catch (Exception e){
+            return  false;
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean changeResourceCount(String id, int count) {
+        try {
+            ChangeCount changeCount=new ChangeCount();
+            changeCount.setCount(count);
+            changeCount.setId(Integer.parseInt(id));
+            userDao.changeResourceCount(changeCount);
+        }catch (Exception e){
+            return  false;
+        }
+
+        return true;
     }
 }

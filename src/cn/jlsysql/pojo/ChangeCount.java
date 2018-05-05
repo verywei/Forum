@@ -1,9 +1,6 @@
-package cn.jlsysql.service;
+package cn.jlsysql.pojo;
 
-import cn.jlsysql.entity.Blog;
-import cn.jlsysql.pojo.AddBlog;
-
-import java.util.List;
+import org.springframework.stereotype.Component;
 
 /*
                            _ooOoo_
@@ -27,12 +24,23 @@ import java.util.List;
         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
                  佛祖保佑       永无BUG
 */
-public interface BlogService {
-    List<Blog> getAllBlogs();
-    List<Blog> getAllBlogsByPage(String page);
-    Blog getBlogByid(String id);
-    List getBlogByPage(int page);
-    List<Blog> getBlogByAuthor(int author);
-    List<Blog> getBlogByKind(int kind);
-    void  addBlog(AddBlog addBlog);
+@Component
+public class ChangeCount {
+    int id,count;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
 }

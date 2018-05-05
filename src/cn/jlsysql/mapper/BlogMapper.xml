@@ -14,9 +14,11 @@
     </resultMap>
 
     <select id="getAllBlogs" resultMap="blogMap">
-        SELECT * FROM blog ORDER BY visit DESC ;
+        SELECT * FROM blog ORDER BY visit DESC limit 15;
     </select>
-
+    <select id="getAllBlogsByPage" resultMap="blogMap">
+        SELECT * FROM blog ORDER BY visit DESC limit #{page},15;
+    </select>
     <select id="getBlogById" resultMap="blogMap">
         SELECT * FROM blog WHERE id=#{id}
     </select>

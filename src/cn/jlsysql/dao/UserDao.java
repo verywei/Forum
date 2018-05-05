@@ -1,7 +1,11 @@
 package cn.jlsysql.dao;
 
 import cn.jlsysql.entity.User;
+import cn.jlsysql.pojo.ChangeCount;
+import cn.jlsysql.pojo.ChangeInfo;
 import cn.jlsysql.pojo.ChangePassword;
+
+import java.util.Map;
 
 /*
                            _ooOoo_
@@ -30,4 +34,7 @@ public interface UserDao {
     User getUser(String username);
     void addUser(User user);
     void changePassword(ChangePassword changePassword);
+    void changeInfo(ChangeInfo changeInfo);
+    void  changeBlogCount(ChangeCount changeCount);
+    void  changeResourceCount(ChangeCount changeCount);
 }

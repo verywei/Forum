@@ -14,4 +14,13 @@
     <update id="changePassword" parameterType="changePassword">
         UPDATE user SET  password=#{newPass} WHERE username=#{oldPass}
     </update>
+    <update id="changeInfo" parameterType="changeInfo">
+        UPDATE user SET nickname=#{nickname},img=#{img} WHERE id=#{id}
+    </update>
+    <update id="changeBlogCount" parameterType="changeCount">
+        UPDATE  user SET book_amount=#{count} WHERE id=#{id}
+    </update>
+    <update id="changeResourceCount" parameterType="changeCount">
+        UPDATE  user SET resource_amount=#{count} WHERE id=#{id}
+    </update>
 </mapper>

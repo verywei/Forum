@@ -40,6 +40,15 @@
           <element id="file-copy" path="G:/jedis/spring-data-redis-2.0.6.RELEASE.jar" />
           <element id="file-copy" path="G:/spring-data-commons-2.0.6.RELEASE.jar" />
           <element id="file-copy" path="G:/SPRING/spring-framework-5.0.2.RELEASE/libs/jar/spring-aspects-5.0.2.RELEASE.jar" />
+          <element id="file-copy" path="G:/cglib-3.2.5.jar" />
+          <element id="file-copy" path="G:/asm-6.1.1.jar" />
+          <element id="file-copy" path="G:/cglib/ant-1.9.6.jar" />
+          <element id="file-copy" path="G:/cglib/ant-launcher-1.9.6.jar" />
+          <element id="file-copy" path="G:/cglib/asm-6.0.jar" />
+          <element id="file-copy" path="G:/cglib/cglib-3.2.6.jar" />
+          <element id="file-copy" path="G:/mybatis/mybatis-3.4.5/lib/ognl-3.1.15.jar" />
+          <element id="file-copy" path="G:/mybatis/mybatis-3.4.5/lib/javassist-3.22.0-CR2.jar" />
+          <element id="file-copy" path="G:/fastjson-1.2.42.jar" />
         </element>
       </element>
     </root>

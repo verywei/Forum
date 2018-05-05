@@ -8,6 +8,7 @@ import cn.jlsysql.pojo.AddResource;
 import cn.jlsysql.service.CommentService;
 import cn.jlsysql.service.FollowService;
 import cn.jlsysql.service.ResourceService;
+import cn.jlsysql.service.UserService;
 import cn.jlsysql.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -51,6 +52,8 @@ public class ResourceController {
     CommentService commentService;
     @Autowired
     FollowService followService;
+    @Autowired
+    UserService userService;
     @RequestMapping("/resource")
     public ModelAndView resource(ModelAndView modelAndView){
         modelAndView.setViewName("resource");
@@ -91,6 +94,10 @@ public class ResourceController {
         addResource.setUrl(url);
         addResource.setContent(fileUp.getContent());
         resourceService.addResource(addResource);
+        int count=Integer.parseInt(((User) session.getAttribute("user")).getResource_amount());
+        count++;
+        ((User) session.getAttribute("user")).setResource_amount(count+"");
+        userService.changeResourceCount(((User) session.getAttribute("user")).getId(),count);
 //        modelAndView.addObject("resources",resourceService.getAllResorce(""+1,""+10));
         modelAndView.setViewName("resource");
         modelAndView.addObject("resources",resourceService.getAllResorce(""+1,""+10));
